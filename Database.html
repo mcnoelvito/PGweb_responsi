@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Explore Lawang</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+</head>
+<body>
+      <!--Main Navigation-->
+  <header>
+    <style>
+      /* Carousel styling */
+      #introCarousel,
+      .carousel-inner,
+      .carousel-item,
+      .carousel-item.active {
+        height: 100vh;
+      }
+
+      
+      /* Height for devices larger than 576px */
+      @media (min-width: 100px) {
+        #introCarousel {
+          margin-top: -58.59px;
+        }
+      }
+
+      .navbar .nav-link {
+        color: black !important;
+      }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+      <div class="container-fluid">
+        <!-- Navbar brand -->         
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars" ></i>
+        </button>
+        <div class="logo">
+          <!-- Ganti 'nama_logo.png' dengan nama file logo yang ingin Anda gunakan -->
+          <img src="assets/img/logo/2.png" width="50px" height="50px" alt="Logo">
+        </div>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+            <li class="nav-item active" >
+              <a class="nav-link" href="Homepage-carousel-lawang.html">Beranda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Database.html">Basis Data</a>
+                
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="petaMalang.html">Peta</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav list-inline">
+            <!-- Icons -->
+            <li class="">
+              <a class="nav-link" href="https://www.youtube.com/channel/UCcxEDeWG4DIIoKJAi3vLIBw" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-youtube" style="color: black;"></i>
+                
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.instagram.com/michaelnoelvito/" rel="nofollow" target="_blank">
+                <i class="fab fa-instagram" style="color: black;"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/HusodoMichael" rel="nofollow" target="_blank">
+                <i class="fab fa-twitter" style="color: black;"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/mcnoelvito/PGweb_responsi.git" rel="nofollow" target="_blank">
+                <i class="fab fa-github" style="color: black;"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mt-5">
+    <div id="map" style="height: 30vh;"></div>
+
+    <div class="container">
+        <h2>Data tabel</h2>           
+            <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th>Wisata</th>
+                        <th>Lintang</th>
+                        <th>Bujur</Label></label></th>
+                        <th>Alamat</th>                    
+                        </tr>
+                        </thead>
+                        <tbody id="data-table">            
+            </tbody>            
+            </table>            
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    <script>
+          var map = L.map('map').setView([-7.863575214222824, 112.69356813479482], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        }).addTo(map);
+
+      var markers = L.layerGroup();
+      var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var data = JSON.parse(this.responseText);
+
+                data.forEach(function (row) {
+                    var marker = L.marker([row.Bujur, row.Lintang]).addTo(markers);
+                    marker.bindPopup("<strong>" + row.lawang);
+
+                    var tableRow = document.createElement('tr');
+                    tableRow.innerHTML = `
+                    <td>${row.Wisata}</td>                    
+                    <td>${row.Lintang}</td>
+                    <td>${row.Bujur}</td>
+                    <td>${row.Alamat}</td>
+                    `;
+                    document.getElementById('data-table').appendChild(tableRow); 
+                });
+
+                markers.addTo(map); // Add the layer group to the map
+                map.fitBounds(markers.getBounds()); // Fit the map to the bounds of the markers
+            }
+        };
+
+        xmlhttp.open("GET", "index.php", true); // Replace "get_data.php" with your PHP script that fetches data
+        xmlhttp.send();
+        var basemap1 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href="DIVSIGUGM" target="_blank">DIVSIG UGM</a>'
+        });
+
+        var basemap2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri | <a href="Latihan WebGIS" target="_blank">DIVSIG UGM</a>'
+        });
+
+        var basemap3 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri | <a href="Lathan WebGIS" target="_blank">DIVSIG UGM</a>'
+        });
+
+        var basemap4 = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
+        basemap1.addTo(map);
+
+        /* Layer Marker */
+        var marker1 = L.marker([-7.867973354608582, 112.69520018153081], { draggable: true });
+        marker1.addTo(map);
+        marker1.bindPopup("Rumah");
+
+        var marker2 = L.marker([-7.83068036515044, 112.69723469622365]);
+        marker2.addTo(map);
+        marker2.bindPopup("Lawang");
+
+        /* Control Layer */
+        var baseMaps = {
+            "OpenStreetMap": basemap1,
+            "Esri World Street": basemap2,
+            "Esri Imagery": basemap3,
+            "Stadia Dark Mode": basemap4
+        };       
+        var overlayMaps= {
+           
+        }
+
+        L.control.layers(baseMaps, overlayMaps, { collapsed: false }).addTo(map);
+
+        /* Scale Bar */
+        L.control.scale({
+            maxWidth: 150, position: 'bottomright'
+        }).addTo(map);
+
+        
+    </script>
+    
+
+      </section>    
+      <hr class="my-5" />     
+</body>
+</html>
