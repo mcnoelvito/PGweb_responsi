@@ -139,7 +139,7 @@
 
                 data.forEach(function (row) {
                     var marker = L.marker([row.Lintang, row.Bujur]).addTo(markers);
-                    marker.bindPopup("<strong>" + row.lawang);
+                    marker.bindPopup("<strong>" + row.Wisata);
 
                     var tableRow = document.createElement('tr');
                     tableRow.innerHTML = `
