@@ -13,10 +13,10 @@ Leaflet.js
 Bootstrap
 Fontawesome
 
-Sourcecode Pembangun
-Landing Page terdiri atas dua halaman yaitu index.html dan info.html
-Elemen database ditampilkan dalam Database.html yang basis datanya berasal dari pemanggilan database phpMyAdmin oleh index.php
-Peta Digital (WebGIS) berupa petaMalang.html yang data shapefilnya dari pemanggilan Geoserver oleh wfsgeoserver.php
+Sourcecode Pembangun:
+- Landing Page terdiri atas dua halaman yaitu index.html dan info.html
+- Elemen database ditampilkan dalam Database.html yang basis datanya berasal dari pemanggilan database phpMyAdmin oleh index.php
+- Peta Digital (WebGIS) berupa petaMalang.html yang data shapefilnya dari pemanggilan Geoserver oleh wfsgeoserver.php
 
 
 
