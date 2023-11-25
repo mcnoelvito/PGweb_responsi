@@ -1,7 +1,7 @@
 # Explore Lawang
 WebGIS Mengenai Tempat Wisata di Kecamatan Lawang Kabupaten Malang
 
-**Latar Belakang
+**Latar Belakang**
 Malang raya sebenarnya sudah terkenal sebagai salah satu destinasi wisata favorit khususnya di Jawa Timur. Namun bila merujuk ke Malang raya, kawasan yang jadi destinasi favorit adalah Kota Batu, Kota Malang, dan Kabupaten Malang bagian selatan karena ada pantai. Sementara Kabupaten Malang bagian utara tidak begitu banyak wisatawan. Saya melihat bahwa di kecamatan tempat saya tinggal, Lawang termasuk daerah Kabupaten Malang bagian utara yang mana punya potensi untuk dikembangkan wisatanya.
 
 Komponen Pembangun:
