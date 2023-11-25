@@ -1,6 +1,7 @@
 # Explore Lawang
 WebGIS Mengenai Tempat Wisata di Kecamatan Lawang Kabupaten Malang
 
+Tautan Halaman web: https://mcnoelvito.github.io/PGweb_responsi/
 >**Tangkapan Layar Komponen
 >![beranda](beranda1.png)
 >![beranda2](beranda2.png)
