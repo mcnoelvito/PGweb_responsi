@@ -138,7 +138,7 @@
                 var data = JSON.parse(this.responseText);
 
                 data.forEach(function (row) {
-                    var marker = L.marker([row.Bujur, row.Lintang]).addTo(markers);
+                    var marker = L.marker([row.Lintang, row.Bujur]).addTo(markers);
                     marker.bindPopup("<strong>" + row.lawang);
 
                     var tableRow = document.createElement('tr');
